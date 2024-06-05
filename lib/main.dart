@@ -4,7 +4,7 @@ import 'package:cubit_example/business_logic/posts_state.dart';
 import 'package:cubit_example/business_logic/selectedpost_cubit.dart';
 import 'package:cubit_example/business_logic/selectedpost_state.dart';
 import 'package:cubit_example/helper/injects.dart';
-import 'package:cubit_example/presentation/counter_page.dart';
+import 'package:cubit_example/presentation/counter_with_stream.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<PostCubit>(
             create: (context) => PostCubit(PostInitialState())),
         BlocProvider<SelectPostCubit>(
-            create: (context) => SelectPostCubit(SelectedPostState(Colors.white))),
+            create: (context) =>
+                SelectPostCubit(SelectedPostState(Colors.white))),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const CounterPage(title: 'Cubit Example'),
+        home: const CounterPageWithStreamBuilder(title: 'Cubit Example'),
       ),
     );
   }
