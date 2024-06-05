@@ -30,7 +30,7 @@ class _CounterPageWithStreamBuilderState
               'You have pushed the button this many times:',
             ),
             StreamBuilder(
-                stream: ctrl.stream,
+                stream: ctrl.counterStream,
                 initialData: 0,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
