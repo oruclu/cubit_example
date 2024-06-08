@@ -14,7 +14,7 @@ class CounterPageWithStreamBuilder extends StatefulWidget {
 
 class _CounterPageWithStreamBuilderState
     extends State<CounterPageWithStreamBuilder> {
-  Controller ctrl = Controller();
+  Controller ctrl = Controller.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

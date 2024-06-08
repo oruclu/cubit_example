@@ -3,13 +3,11 @@ import 'package:cubit_example/business_logic/posts_cubit.dart';
 import 'package:cubit_example/business_logic/posts_state.dart';
 import 'package:cubit_example/business_logic/selectedpost_cubit.dart';
 import 'package:cubit_example/business_logic/selectedpost_state.dart';
-import 'package:cubit_example/helper/injects.dart';
 import 'package:cubit_example/presentation/counter_with_stream.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  setupInjects();
   runApp(const MyApp());
 }
 

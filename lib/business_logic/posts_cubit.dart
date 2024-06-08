@@ -4,12 +4,11 @@ import 'package:cubit_example/model/post_model.dart';
 import 'package:cubit_example/repository/post_repo.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cubit_example/helper/injects.dart';
 
 class PostCubit extends Cubit<PostState> {
   PostCubit(super.initialState);
 
-  final _services = getIt<PostServices>();
+  final _services = PostServices.instance;
 
   List<PostModel> posts = [];
 
