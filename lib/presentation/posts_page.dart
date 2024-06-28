@@ -82,7 +82,7 @@ class PostCard extends StatelessWidget {
     return BlocBuilder<PostCubit, PostState>(builder: (context, state) {
       return Card(
         margin: const EdgeInsets.only(bottom: 16),
-        color: cardColor(state),
+        color: cardColor(state.selectedPostIds),
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
@@ -105,8 +105,8 @@ class PostCard extends StatelessWidget {
     });
   }
 
-  Color cardColor(PostState state) {
-    return state.selectedPostIds.any(
+  Color cardColor(List<int> selectedPostIds) {
+    return selectedPostIds.any(
       (element) => element == post.id,
     )
         ? Colors.orangeAccent
