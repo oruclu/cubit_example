@@ -1,27 +1,38 @@
 import 'package:cubit_example/business_logic/posts_state.dart';
 import 'package:cubit_example/data/post_services.dart';
-import 'package:cubit_example/model/post_model.dart';
-import 'package:cubit_example/repository/post_repo.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cubit_example/helper/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostCubit extends Cubit<PostState> {
-  PostCubit(super.initialState);
+  PostCubit()
+      : super(const PostState(
+            posts: [], pageState: PageState.idle, selectedPostIds: []));
 
   final _services = PostServices.instance;
 
-  List<PostModel> posts = [];
-
   Future<void> fetchPosts() async {
     try {
-      emit(PostLoadingState());
+      emit(state.copyWith(pageState: PageState.loading));
+
       final posts = await _services.fetchPosts();
-      debugPrint('posts len : ${posts.length}');
-      emit(PostLoadedState(posts));
+
+      emit(state.copyWith(posts: posts, pageState: PageState.completed));
     } catch (e) {
-      debugPrint('err: $e');
-      emit(PostErrorState());
+      emit(state.copyWith(pageState: PageState.error));
     }
   }
 
+  void selectPost(int postId) {
+    List<int> selectedPostIDs = [];
+    selectedPostIDs.addAll(state.selectedPostIds);
+    selectedPostIDs.add(postId);
+    emit(state.copyWith(selectedPostIds: selectedPostIDs));
+  }
+
+  void unSelectPost(int postId) {
+    List<int> selectedPostIDs = [];
+    selectedPostIDs.addAll(state.selectedPostIds);
+    selectedPostIDs.removeWhere((element) => element == postId);
+    emit(state.copyWith(selectedPostIds: selectedPostIDs));
+  }
 }

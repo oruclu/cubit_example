@@ -1,28 +1,28 @@
+import 'package:cubit_example/helper/enums.dart';
 import 'package:cubit_example/model/post_model.dart';
-import 'package:cubit_example/repository/post_repo.dart';
+import 'package:equatable/equatable.dart';
 
-class PostInitialState extends PostState {
-  @override
-  List<Object?> get props => [];
-}
+class PostState extends Equatable {
+  const PostState(
+      {required this.posts,
+      required this.pageState,
+      required this.selectedPostIds});
 
-class PostLoadingState extends PostState {
-  @override
-  List<Object?> get props => [];
-}
-
-class PostLoadedState extends PostState {
-
-  PostLoadedState(this.posts);
-
+  final PageState pageState;
   final List<PostModel> posts;
+  final List<int> selectedPostIds;
+
+  PostState copyWith({
+    final PageState? pageState,
+    final List<PostModel>? posts,
+    List<int>? selectedPostIds,
+  }) {
+    return PostState(
+        posts: posts ?? this.posts,
+        pageState: pageState ?? this.pageState,
+        selectedPostIds: selectedPostIds ?? this.selectedPostIds);
+  }
 
   @override
-  List<Object?> get props => [posts];
+  List<Object?> get props => [posts, pageState, selectedPostIds];
 }
-
-class PostErrorState extends PostState {
-  @override
-  List<Object?> get props => [];
-}
-
